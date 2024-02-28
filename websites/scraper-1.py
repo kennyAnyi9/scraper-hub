@@ -27,18 +27,25 @@ book_lists = interested_container.find_all('li')
 
 
 for items in book_lists:
-    image_url = items.a.get('href')
+    # image_url = items.a.get('href')
+    image_url = items.article.div.a['href'].replace(" ",'')
     Book_title = items.h3.text
     price_container = items.find('div', class_='product_price')
-    price = price_container.find('p', class_='price_color').text
+    price = price_container.find('p', class_='price_color').text.replace(" ",'')
     availability = price_container.find('p',class_='instock availability').text.replace(" ",'' )
     
-    print(f'''
-          product name: {Book_title}
-          Product image: {image_url}
-          Product price: {price}
-          Product avalability: {availability}  
-          ''')
+    # print(f'''
+    #       product name: {Book_title}
+    #       Product image: {image_url}
+    #       Product price: {price}
+    #       Product avalability: {availability}  
+    #       ''')
+    
+    print(f'product name: {Book_title.strip()}')
+    print(f' Product image:{image_url}')
+    print(f'Product price: {price.strip()}')
+    print(f'Product avalability: {availability.strip()}')
+
 
 
 
